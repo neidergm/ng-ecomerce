@@ -51,7 +51,7 @@ export function SideBar() {
               </Link>
             </li>
             <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/profile">
+              <Link href="/auth/login">
                 <IoLogInOutline className='inline-block mr-2' />
                 Login
               </Link>

@@ -6,6 +6,7 @@ export * from './products/grid/ProductsGrid';
 export * from './products/grid/ProductGridItem';
 
 export { SideBar } from './ui/sidebar/SideBar';
+export { Footer } from './ui/Footer';
 export { Title } from './ui/Title';
 
 export { SizeSelector } from './product/SizeSelector';

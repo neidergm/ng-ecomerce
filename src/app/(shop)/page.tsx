@@ -5,14 +5,17 @@ const products = initialData.products;
 
 export default function Home() {
   return (
-    <main>
-      <Title
-        title="Shop"
-        subTitle="Welcome to our shop"
-      />
-      <ProductsGrid
-        products={products}
-      />
-    </main>
+    <>
+    <Title
+      title="Shop"
+      subTitle="All products"
+      className="mb-2"
+    />
+
+    <ProductsGrid 
+      products={ products }
+    />
+    
+  </>
   );
 }
