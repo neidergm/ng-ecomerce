@@ -1,4 +1,5 @@
 export interface Product {
+    id: string;
     description: string;
     images: string[];
     inStock: number;
@@ -6,11 +7,13 @@ export interface Product {
     sizes: ValidSizes[];
     slug: string;
     tags: string[];
-    title: string;
-    type: ValidTypes;
+    name: string;
+    categoryId: string;
+    category: string;
     gender: ValidCategories
 }
 
-export type ValidCategories = 'men'|'women'|'kid'|'unisex';
-export type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
+// export type ValidCategories = 'men'|'women'|'kid'|'unisex';
+export type ValidCategories = 'male'|'female'|'unisex';
+export type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL' | 'UNIQUE';
 export type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats';

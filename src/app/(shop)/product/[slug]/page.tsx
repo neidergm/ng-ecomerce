@@ -4,9 +4,9 @@ import { initialData } from "@/seed/seed"
 import { notFound } from "next/navigation";
 
 type ProductPageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 const products = initialData.products;

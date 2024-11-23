@@ -27,7 +27,7 @@ export default function ProductGridItem({ product }: Props) {
             <Link href={link}>
                 <Image
                     src={`/imgs/products/${product.images[displayImg]}`}
-                    alt={product.title}
+                    alt={product.name}
                     width={500}
                     height={500}
                     className="w-full object-cove rounded"
@@ -37,12 +37,10 @@ export default function ProductGridItem({ product }: Props) {
             </Link>
             <div className="p-4 flex flex-col">
                 <Link href={link} className="hover:text-blue-600">
-                    {product.title}
+                    {product.name}
                 </Link>
                 <span className="font-bold">${product.price}</span>
             </div>
-            {/* <p className="text-sm text-gray-500">{product.description}</p>
-            <p className="text-sm text-gray-500">{product.price}</p> */}
         </div>
     )
 }

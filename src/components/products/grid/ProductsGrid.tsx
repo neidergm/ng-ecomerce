@@ -15,7 +15,6 @@ export const ProductsGrid = ({ products }: Props) => {
                 ))
             }
 
-
         </div>
     )
 }
