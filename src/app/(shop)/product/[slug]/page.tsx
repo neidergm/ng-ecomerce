@@ -1,21 +1,41 @@
-import { QuantitySelector, SizeSelector, ProductSlideShow, ProductSlideShowMobile } from "@/components";
-import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed"
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { titleFont } from "@/config/fonts";
+import { QuantitySelector, SizeSelector, ProductSlideShow, ProductSlideShowMobile, ProductStockLabel } from "@/components";
+import { getProductBySlug } from "@/actions";
 
-type ProductPageProps = {
+type Props = {
   params: Promise<{
     slug: string
   }>
 }
 
-const products = initialData.products;
+export const revalidate = 604800;
 
-export default async  function ProductPage({ params }: ProductPageProps) {
+export async function generateMetadata(
+  { params }: Props,
+  // parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = await params
+  const product = await getProductBySlug(slug)
+
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product?.name || 'Product not found',
+    description: product?.description || 'Product not found',
+    openGraph: {
+      images: [`/products/${product?.images[0]}`],
+    },
+  }
+}
+
+export default async function ProductPage({ params }: Props) {
 
   const { slug } = await params
 
-  const product = products.find((product) => product.slug === slug)
+  const product = await getProductBySlug(slug)
 
   if (!product) {
     notFound()
@@ -32,8 +52,11 @@ export default async  function ProductPage({ params }: ProductPageProps) {
 
       {/* Details */}
       <div className="col-span-1 px-5">
+
+        <ProductStockLabel slug={slug} />
+
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
-          {product.title}
+          {product.name}
         </h1>
         <p className="text-lg mb-5">${product.price}</p>
 
