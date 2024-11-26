@@ -9,6 +9,9 @@ export const getProductBySlug = async (slug: string) => {
             include: {
                 ProductImage: {
                     select: { url: true }
+                },
+                category:{
+                    select: { name: true }
                 }
             },
             where: { slug }
@@ -16,10 +19,12 @@ export const getProductBySlug = async (slug: string) => {
 
         if (!product) return null
 
-        const { ProductImage, ...rest } = product
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { ProductImage, category, categoryId, ...rest } = product
 
         return {
             ...rest,
+            category: category.name,
             images: ProductImage.map(({ url }) => url)
         }
     } catch (error) {

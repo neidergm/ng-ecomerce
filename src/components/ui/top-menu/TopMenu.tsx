@@ -1,16 +1,22 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { titleFont } from '@/config/fonts'
-import { useUIStore } from '@/store'
+import { useCartStore, useUIStore } from '@/store'
 import Link from 'next/link'
-import React from 'react'
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5'
 
 const shopName = "Teslo"
 
 export function TopMenu() {
-    
+
+    const [loaded, setLoaded] = useState(false)
     const openSideMenu = useUIStore(s => s.openSideMenu)
+    const totalItems = useCartStore(s => s.getTotalItems())
+
+    useEffect(() => {
+        setLoaded(true)
+    }, [])
 
     return (
         <div className='flex justify-between'>
@@ -42,13 +48,13 @@ export function TopMenu() {
                 <Link href="/search">
                     <IoSearchOutline className='h-5 w-5' />
                 </Link>
-                <Link href="/cart">
+                <Link href={(loaded && totalItems === 0) ? "/empty" : "/cart"}>
                     <div className='relative'>
-                        <span
-                            className='absolute text-xs px-1 font-bold bg-red-700 rounded-full -top-2 -right-2 text-white'
+                        {loaded && totalItems > 0 && <span
+                            className='fade-in absolute text-xs px-1 font-bold bg-red-700 rounded-full -top-2 -right-2 text-white'
                         >
-                            3
-                        </span>
+                            {totalItems}
+                        </span>}
                         <IoCartOutline className='w-5 h-5' />
                     </div>
                 </Link>

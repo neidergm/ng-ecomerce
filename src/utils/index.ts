@@ -1,1 +1,2 @@
-export * from '@/utils/paginationNumbers';
+export * from './paginationNumbers';
+export * from './currencyFormat';

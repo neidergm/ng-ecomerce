@@ -1,7 +1,7 @@
 
 import { getPaginatedProductsWitImages } from "@/actions";
 import { Pagination, ProductsGrid, Title } from "@/components";
-import { ValidCategories } from "@/interfaces";
+import { ValidGenders } from "@/interfaces";
 import { Gender } from "@prisma/client";
 
 type Props = {
@@ -23,7 +23,7 @@ export default async function GenderPage({ params, searchParams }: Props) {
   //   notFound()
   // }
 
-  const labels: Record<ValidCategories, string> = {
+  const labels: Record<ValidGenders, string> = {
     male: "Men",
     female: "Women",
     unisex: "Everyone",

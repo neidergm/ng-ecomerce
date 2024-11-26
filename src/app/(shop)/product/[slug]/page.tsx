@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { titleFont } from "@/config/fonts";
-import { QuantitySelector, SizeSelector, ProductSlideShow, ProductSlideShowMobile, ProductStockLabel } from "@/components";
+import { ProductSlideShow, ProductSlideShowMobile, ProductStockLabel } from "@/components";
 import { getProductBySlug } from "@/actions";
+import { AddToCart } from "./ui/AddToCart";
 
 type Props = {
   params: Promise<{
@@ -60,16 +61,7 @@ export default async function ProductPage({ params }: Props) {
         </h1>
         <p className="text-lg mb-5">${product.price}</p>
 
-        <div className="mb-5">
-          <h3 className="font-bold">Size</h3>
-          <SizeSelector sizes={product.sizes} />
-        </div>
-
-        <QuantitySelector quantity={1} />
-
-        <button className="btn-primary my-5">
-          Add to cart
-        </button>
+        <AddToCart product={product} />
 
         <h3 className="font-bold">Description</h3>
         <p>{product.description}</p>
