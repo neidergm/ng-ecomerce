@@ -5,9 +5,11 @@ import { initialData } from './seed'
 async function main() {
 
     // 1. Delete all data in the database
-    await prisma.product.deleteMany();
     await prisma.productImage.deleteMany();
+    await prisma.product.deleteMany();
     await prisma.category.deleteMany();
+
+    await prisma.user.deleteMany();
 
     //2. Create categories
     const categories = initialData.categories.map((name) => ({ name }))
@@ -23,9 +25,6 @@ async function main() {
     }, {} as Record<string, string>)
 
     const genders = { "men": "male", "women": "female", "kid": "unisex", "unisex": "unisex" }
-
-
-
 
     initialData.products.forEach(async (p) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,6 +43,10 @@ async function main() {
 
         await prisma.productImage.createMany({ data: imagesData })
     })
+
+    // Create users
+
+    await prisma.user.createMany({ data: initialData.users })
 
 
     console.log('Seed database executed correctly')

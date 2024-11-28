@@ -83,15 +83,6 @@ export const Pagination = ({ totalPages }: Props) => {
                             })
                         }
 
-                        {/* <li className="page-item"><a
-                            className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                            href="#">1</a></li>
-                        <li className="page-item active"><a
-                            className="page-link relative block py-1.5 px-3 border-0 bg-blue-600 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                            href="#">2 <span className="visually-hidden"></span></a></li>
-                        <li className="page-item"><a
-                            className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                            href="#">3</a></li> */}
                         <li className="page-item">
                             <Link
                                 href={createPageUrl(currentPage + 1)}

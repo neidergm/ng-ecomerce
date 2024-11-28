@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { QuantitySelector } from "@/components"
 import { useCartStore } from "@/store"
 import Image from "next/image"
+import { currencyFormat } from "@/utils"
 
 export const CartItems = () => {
 
@@ -36,12 +37,12 @@ export const CartItems = () => {
             />
             <div>
               <p><span>{product.size}</span> | {product.name}</p>
-              <p>${product.price}</p>
+              <p>{currencyFormat(product.price)}</p>
               <QuantitySelector
                 quantity={product.quantity}
                 onSelectQuantity={q => updateProductQuantity(product, q)}
               />
-              <button className="underline" onClick={()=>removeFromCart(product)}>Remove</button>
+              <button className="underline" onClick={() => removeFromCart(product)}>Remove</button>
             </div>
           </div>
         })

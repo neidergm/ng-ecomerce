@@ -1,11 +1,31 @@
 'use client'
 
+import { useSession, signOut } from 'next-auth/react'
+import Link from 'next/link'
+// import { logout } from '@/actions'
 import { useUIStore } from '@/store'
 import clsx from 'clsx'
-import Link from 'next/link'
-import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from 'react-icons/io5'
+import {
+  IoCloseOutline,
+  IoLogInOutline,
+  IoLogOutOutline,
+  IoPeopleOutline,
+  IoPersonOutline,
+  IoSearchOutline,
+  IoShirtOutline,
+  IoTicketOutline
+} from 'react-icons/io5'
+// import { logout } from '@/actions'
 
 export function SideBar() {
+
+  const session = useSession()
+  const { data } = session
+  const isAuthenticated = !!data?.user;
+
+  console.log(session)
+
+  const isAdmin = data?.user?.role === 'admin'
 
   const isSideMenuOpen = useUIStore(s => s.isSideMenuOpen)
   const closeSideMenu = useUIStore(s => s.closeSideMenu)
@@ -16,8 +36,8 @@ export function SideBar() {
         {/* Overlay */}
         < div className='fixed top-0 left-0 h-screen w-screen z-10 bg-black opacity-30'></div>
         {/* Blur */}
-        <div className='fixed top-0 left-0 h-screen w-screen z-10 fade-in backdrop-filter backdrop-blur-sm' 
-        onClick={closeSideMenu}
+        <div className='fixed top-0 left-0 h-screen w-screen z-10 fade-in backdrop-filter backdrop-blur-sm'
+          onClick={closeSideMenu}
         ></div>
       </>}
 
@@ -38,59 +58,70 @@ export function SideBar() {
 
         <div className='mt-5 mb-5'>
           <ul>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/profile">
-                <IoPersonOutline className='inline-block mr-2' />
-                Profile
-              </Link>
-            </li>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/orders">
-                <IoTicketOutline className='inline-block mr-2' />
-                Orders
-              </Link>
-            </li>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/auth/login">
+            {isAuthenticated && <>
+              <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                <Link href="/profile" onClick={closeSideMenu}>
+                  <IoPersonOutline className='inline-block mr-2' />
+                  Profile
+                </Link>
+              </li>
+              <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                <Link href="/orders">
+                  <IoTicketOutline className='inline-block mr-2' />
+                  Orders
+                </Link>
+              </li>
+              <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                <button onClick={() => {
+                  // logout()
+                  signOut()
+                  closeSideMenu()
+                }}>
+                  <IoLogOutOutline className='inline-block mr-2' />
+                  Logout
+                </button>
+              </li>
+            </>
+            }
+            {!isAuthenticated && <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+              <Link href="/auth/login" onClick={closeSideMenu}>
                 <IoLogInOutline className='inline-block mr-2' />
                 Login
               </Link>
-            </li>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/profile">
-                <IoLogOutOutline className='inline-block mr-2' />
-                Logout
-              </Link>
-            </li>
+            </li>}
           </ul>
         </div>
 
-        <div>
-          <hr />
-        </div>
+        {
+          isAdmin && (<>
+            <div>
+              <hr />
+            </div>
+            <div className='mt-5 mb-5'>
+              <ul>
+                <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                  <Link href="/products">
+                    <IoShirtOutline className='inline-block mr-2' />
+                    Productos
+                  </Link>
+                </li>
+                <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                  <Link href="/orders">
+                    <IoTicketOutline className='inline-block mr-2' />
+                    Orders
+                  </Link>
+                </li>
+                <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
+                  <Link href="/profile">
+                    <IoPeopleOutline className='inline-block mr-2' />
+                    Users
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>)
+        }
 
-        <div className='mt-5 mb-5'>
-          <ul>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/products">
-                <IoShirtOutline className='inline-block mr-2' />
-                Productos
-              </Link>
-            </li>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/orders">
-                <IoTicketOutline className='inline-block mr-2' />
-                Orders
-              </Link>
-            </li>
-            <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-              <Link href="/profile">
-                <IoPeopleOutline className='inline-block mr-2' />
-                Users
-              </Link>
-            </li>
-          </ul>
-        </div>
 
 
       </nav>

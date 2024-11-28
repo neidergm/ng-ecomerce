@@ -21,8 +21,6 @@ export const getPaginatedProductsWitImages = async (
         if (isNaN(page) || page < 1) page = 1;
         if (isNaN(take) || page < 1) page = defaultTake;
 
-        console.log(page, take)
-
         const products = await prisma.product.findMany({
             take,
             skip: take * (page - 1),

@@ -4,6 +4,7 @@ import { titleFont } from "@/config/fonts";
 import { ProductSlideShow, ProductSlideShowMobile, ProductStockLabel } from "@/components";
 import { getProductBySlug } from "@/actions";
 import { AddToCart } from "./ui/AddToCart";
+import { currencyFormat } from "@/utils";
 
 type Props = {
   params: Promise<{
@@ -59,7 +60,7 @@ export default async function ProductPage({ params }: Props) {
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.name}
         </h1>
-        <p className="text-lg mb-5">${product.price}</p>
+        <p className="text-lg mb-5">{currencyFormat(product.price)}</p>
 
         <AddToCart product={product} />
 
