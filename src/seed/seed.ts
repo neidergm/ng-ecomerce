@@ -1,4 +1,5 @@
 import bcryptjs from 'bcryptjs';
+import { countries } from './seed-countries';
 
 interface SeedProduct {
     description: string;
@@ -21,12 +22,13 @@ interface SeedUser {
     password: string;
     role: 'user' | 'admin'
     name: string
-}       
+}
 
 interface SeedData {
     users: SeedUser[],
     products: SeedProduct[],
-    categories: ValidTypes[]
+    categories: ValidTypes[],
+    countries: typeof countries
 }
 
 
@@ -35,18 +37,19 @@ interface SeedData {
 export const initialData: SeedData = {
     users: [
         {
-        email: 'neider@google.com',
-        password: bcryptjs.hashSync('123456'),
-        role: 'admin',
-        name: 'Neider Galofre'
-    },
+            email: 'neider@google.com',
+            password: bcryptjs.hashSync('123456'),
+            role: 'admin',
+            name: 'Neider Galofre'
+        },
         {
-        email: 'gabriela@google.com',
-        password: bcryptjs.hashSync('123456'),
-        role: 'user',
-        name: 'Gabriela Tejedor'
-    }
-],
+            email: 'gabriela@google.com',
+            password: bcryptjs.hashSync('123456'),
+            role: 'user',
+            name: 'Gabriela Tejedor'
+        }
+    ],
+    countries: countries,
     categories: ['shirts', 'pants', 'hoodies', 'hats'],
     products: [
         {
