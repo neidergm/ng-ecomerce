@@ -1,6 +1,7 @@
 'use client'
 
 import { useCartStore } from '@/store'
+import { currencyFormat } from '@/utils'
 import Image from 'next/image'
 
 export const ProductsInCart = () => {
@@ -27,8 +28,8 @@ export const ProductsInCart = () => {
 
                         <div>
                             <p>{product.name}</p>
-                            <p>${product.price} x 3</p>
-                            <p className="font-bold">Subtotal: ${product.price * 3}</p>
+                            <p>${product.price} x {product.quantity}</p>
+                            <p className="font-bold">Subtotal: {currencyFormat(product.quantity * product.price)}</p>
                         </div>
 
                     </div>

@@ -10,6 +10,8 @@ interface State {
     updateProductQuantity: (product: ProductInCart, quantity: number) => void;
     removeFromCart: (product: ProductInCart) => void;
     getSummaryInformation: () => { itemsInCart: number; subTotal: number; tax: number; total: number };
+
+    clearCart: () => void;
 }
 
 export const useCartStore = create<State>()(
@@ -63,6 +65,10 @@ export const useCartStore = create<State>()(
                 const total = subTotal + tax;
 
                 return { itemsInCart, subTotal, tax, total };
+            },
+
+            clearCart() {
+                set({ cart: [] });
             }
         }),
         {

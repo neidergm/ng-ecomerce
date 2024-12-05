@@ -4,6 +4,7 @@ import { deleteUserAddress, setUserAddress } from "@/actions";
 import { UserAddressFormFields } from "@/interfaces";
 import { userAddressStore } from "@/store";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form"
 
@@ -11,6 +12,8 @@ export const AddressForm = ({ defaultValues }: { defaultValues?: UserAddressForm
 
     const address = userAddressStore(s => s.address)
     const setAddress = userAddressStore(s => s.setAddress)
+
+    const router = useRouter()
 
     const {
         register,
@@ -26,6 +29,8 @@ export const AddressForm = ({ defaultValues }: { defaultValues?: UserAddressForm
         }else{
             await deleteUserAddress()
         }
+
+        router.push('/checkout')
     }
 
     useEffect(() => {

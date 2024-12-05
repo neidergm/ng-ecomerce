@@ -14,7 +14,9 @@ export const deleteUserAddress = async () => {
             where: {
                 userId: session.user.id
             }
-        })
+        }).catch(() =>  false)
+
+        console.log({result})
 
         return {
             error: false,
@@ -23,7 +25,7 @@ export const deleteUserAddress = async () => {
         }
 
     } catch (error) {
-        console.error(error)
+        console.error({error})
 
         return {
             error: true,

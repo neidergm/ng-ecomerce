@@ -9,6 +9,7 @@
 5. Run dev ``` npm run dev ```
 6. Start up Docker container (as detach) for database
     ``` docker compose up -d ```
+7. Clear localStorage
 
 ## Prisma 
 1. Run prisma migrations ```npx prisma migrate dev```
