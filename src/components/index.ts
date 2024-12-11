@@ -15,3 +15,6 @@ export * from './product/QuantitySelector';
 export * from './product/slideshow/ProductSlideShow';
 export * from './product/slideshow/ProductSlideShowMobile';
 export * from './product/ProductStockLabel';
+
+export * from './paypal/PaypalButton';
+export * from './order/IsPaid';

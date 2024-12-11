@@ -46,9 +46,9 @@ export const authConfig: NextAuthConfig = {
     callbacks: {
 
         authorized({ auth, request: { nextUrl } }) {
-            console.log("START ==========")
-            console.log({ auth})
-            console.log("END ==========")
+            // console.log("START ==========")
+            // console.log({ auth})
+            // console.log("END ==========")
             
             const isLoggedIn = !!auth?.user;
 

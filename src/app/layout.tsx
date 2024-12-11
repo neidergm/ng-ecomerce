@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { geistMono, geistSans } from "../config/fonts";
 import "./globals.css";
-import { UserSessionProvider } from "@/providers/UserSessionProvider";
+import { UserSessionProvider, PaypalProvider } from "@/providers";
 
 export const metadata: Metadata = {
   title: {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Online store for the modern generation",
 };
 
-export default async  function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -22,7 +22,9 @@ export default async  function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserSessionProvider>
-          {children}
+          <PaypalProvider>
+            {children}
+          </PaypalProvider>
         </UserSessionProvider>
       </body>
     </html>

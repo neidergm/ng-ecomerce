@@ -1,9 +1,8 @@
 // https://tailwindcomponents.com/component/hoverable-table
 import { getOrdersByUser } from '@/actions';
-import { Title } from '@/components';
+import { IsPaid, Title } from '@/components';
 
 import Link from 'next/link';
-import { IoCardOutline } from 'react-icons/io5';
 
 export default async function OrdersPage() {
 
@@ -34,7 +33,9 @@ export default async function OrdersPage() {
           <tbody>
             {
               orders.map(order =>
-                <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                <tr key={order.id}
+                  className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                >
 
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {order.id.split('-').pop()}
@@ -43,19 +44,7 @@ export default async function OrdersPage() {
                     {order.OrderAddress?.name} {order.OrderAddress?.lastName}
                   </td>
                   <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                    {
-                      order.isPaid ?
-                        <>
-                          <IoCardOutline className="text-green-800" />
-                          <span className='mx-2 text-green-800'>Paid</span>
-                        </>
-                        :
-                        <>
-                          <IoCardOutline className="text-red-800" />
-                          <span className='mx-2 text-red-800'>Pending</span>
-                        </>
-                    }
-
+                    <IsPaid paid={order.isPaid} />
                   </td>
                   <td className="text-sm text-gray-900 font-light px-6 ">
                     <Link href={`/orders/${order.id}`} className="hover:underline">

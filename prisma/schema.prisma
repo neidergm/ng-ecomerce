@@ -121,6 +121,8 @@ model Order {
   isPaid       Boolean   @default(false)
   paidAt       DateTime?
 
+  transactionId String?
+
   User   User   @relation(fields: [userId], references: [id])
   userId String
 

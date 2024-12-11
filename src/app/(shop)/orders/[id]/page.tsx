@@ -1,8 +1,5 @@
-import { Title } from '@/components';
-import { initialData } from '@/seed/seed';
+import { IsPaid, PaypalButton, Title } from '@/components';
 import Image from 'next/image';
-import clsx from 'clsx';
-import { IoCardOutline } from 'react-icons/io5';
 import { getOrdersById } from '@/actions';
 import { redirect } from 'next/navigation';
 import { currencyFormat } from '@/utils';
@@ -13,16 +10,11 @@ interface Props {
     }>
 }
 
-
 export default async function OrdersPage({ params }: Props) {
 
     const { id } = await params;
 
     const order = await getOrdersById(id);
-
-    console.log()
-
-    // Todo: verificar
 
     if (!order) redirect("/orders");
 
@@ -39,20 +31,7 @@ export default async function OrdersPage({ params }: Props) {
                     {/* Carrito */}
                     <div className="flex flex-col mt-5">
 
-                        <div className={
-                            clsx(
-                                "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                                order.isPaid ? 'bg-green-700' : 'bg-red-500',
-                            )
-                        }>
-                            <IoCardOutline size={30} />
-                            {/* <span className="mx-2">Pendiente de pago</span> */}
-                            <span className="mx-2">
-                                {order.isPaid ? 'Paid' : 'Pending payment'}
-                            </span>
-                        </div>
-
-
+                        <IsPaid paid={order.isPaid} />
 
                         {/* Items */}
                         {
@@ -109,48 +88,39 @@ export default async function OrdersPage({ params }: Props) {
                         <div className="grid grid-cols-2">
 
                             <span>No. Productos</span>
-                            <span className="text-right">3 artículos</span>
+                            <span className="text-right">{order.itemsInOrder} artículos</span>
 
                             <span>Subtotal</span>
-                            <span className="text-right">$ 100</span>
+                            <span className="text-right">{currencyFormat(order.subTotal)}</span>
 
                             <span>Impuestos (15%)</span>
-                            <span className="text-right">$ 100</span>
+                            <span className="text-right">{currencyFormat(order.tax)}</span>
 
                             <span className="mt-5 text-2xl">Total:</span>
-                            <span className="mt-5 text-2xl text-right">$ 100</span>
+                            <span className="mt-5 text-2xl text-right">{currencyFormat(order.total)}</span>
 
 
                         </div>
 
                         <div className="mt-5 mb-2 w-full">
 
-                            <div className={
-                                clsx(
-                                    "flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5",
-                                    order.isPaid ? 'bg-green-700' : 'bg-red-500',
-                                )
-                            }>
-                                <IoCardOutline size={30} />
-                                {/* <span className="mx-2">Pendiente de pago</span> */}
-                                <span className="mx-2">
-                                    {order.isPaid ? 'Paid' : 'Pending payment'}
-                                </span>
-                            </div>
+                            {
+                                order.isPaid ?
+                                    <IsPaid paid />
+                                    :
+                                    <PaypalButton
+                                        amount={order.total}
+                                        orderId={id}
+                                    />
+                            }
 
                         </div>
 
-
                     </div>
-
-
 
                 </div>
 
-
-
             </div>
-
 
         </div>
     );
