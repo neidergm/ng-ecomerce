@@ -13,11 +13,11 @@ type Props = {
 export const ProductImage = ({ height, alt, src, width, className, style, ...props }: Props) => {
 
     const customSrc = (src)
-        ? src.startsWith('http') ? src : `/imgs/products/${src}`
+        ? src.startsWith('http') ? src : `/products/${src}`
         : "/imgs/placeholder.jpg"
-
     return (
         <Image
+            title={customSrc}
             style={style}
             height={height}
             width={width}
