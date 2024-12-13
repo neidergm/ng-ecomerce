@@ -15,9 +15,9 @@ export const ProductImage = ({ height, alt, src, width, className, style, ...pro
     const customSrc = (src)
         ? src.startsWith('http') ? src : `/products/${src}`
         : "/imgs/placeholder.jpg"
+
     return (
         <Image
-            title={customSrc}
             style={style}
             height={height}
             width={width}
