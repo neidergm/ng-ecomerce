@@ -19,6 +19,9 @@
 
 ## Build production
 
-1. 
+1. Create DB
+2. Configure environmet variables
+3. npm run build
+
 
     
