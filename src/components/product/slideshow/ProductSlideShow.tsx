@@ -62,7 +62,7 @@ export const ProductSlideShow = ({ images, className = "" }: Props) => {
                     <ProductImage
                         width={300}
                         height={300}
-                        src={`/imgs/products/${image}`}
+                        src={image}
                         alt="Product Image"
                         className='object-fill rounded-lg'
                     />
