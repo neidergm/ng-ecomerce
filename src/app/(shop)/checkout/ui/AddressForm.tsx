@@ -37,7 +37,7 @@ export const AddressForm = ({ defaultValues }: { defaultValues?: UserAddressForm
         if (address) {
             reset(address)
         }
-    }, [address])
+    }, [address, reset])
 
     return (
         <form

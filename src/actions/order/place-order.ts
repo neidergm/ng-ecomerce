@@ -21,7 +21,8 @@ type ProductsForTransaction = ProductsToBuy & {
     price: number;
 };
 
-export const placeOrder = async (productsToBuy: ProductsToBuy[], {saveAddress, ...address}: UserAddressServerAction) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const placeOrder = async (productsToBuy: ProductsToBuy[], { saveAddress, ...address }: UserAddressServerAction) => {
 
     const session = await auth()
 
@@ -70,10 +71,10 @@ export const placeOrder = async (productsToBuy: ProductsToBuy[], {saveAddress, .
             data: result
         }
 
-    } catch (error: any) {
+    } catch (error) {
         return {
             error: true,
-            message: (error).message
+            message: (error as { message: string }).message
         }
     }
 

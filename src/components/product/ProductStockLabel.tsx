@@ -9,14 +9,14 @@ export const ProductStockLabel = ({ slug }: { slug: string }) => {
     // const useState
     const [stock, setStock] = useState<number>()
 
-    const getStock = async () => {
-        const s = await getProductStock(slug)
-        setStock(s)
-    }
 
     useEffect(() => {
+        const getStock = async () => {
+            const s = await getProductStock(slug)
+            setStock(s)
+        }
         getStock()
-    }, [])
+    }, [slug])
 
     if (stock === undefined) return (
         <h2 className={`animate-pulse p-3 bg-gray-200 rounded-md mb-3`}></h2>
