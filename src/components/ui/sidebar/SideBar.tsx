@@ -23,8 +23,6 @@ export function SideBar() {
   const { data } = session
   const isAuthenticated = !!data?.user;
 
-  console.log(session)
-
   const isAdmin = data?.user?.role === 'admin'
 
   const isSideMenuOpen = useUIStore(s => s.isSideMenuOpen)
