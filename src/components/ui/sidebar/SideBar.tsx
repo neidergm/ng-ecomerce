@@ -66,9 +66,9 @@ export function SideBar() {
                 </Link>
               </li>
               <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-                <Link href="/orders">
+                <Link href="/orders" onClick={closeSideMenu}>
                   <IoTicketOutline className='inline-block mr-2' />
-                  Orders
+                  My Orders
                 </Link>
               </li>
               <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
@@ -100,19 +100,19 @@ export function SideBar() {
             <div className='mt-5 mb-5'>
               <ul>
                 <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-                  <Link href="/products">
+                  <Link href="/admin/products" onClick={closeSideMenu}>
                     <IoShirtOutline className='inline-block mr-2' />
-                    Productos
+                    Products
                   </Link>
                 </li>
                 <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-                  <Link href="/orders">
+                  <Link href="/admin/orders" onClick={closeSideMenu}>
                     <IoTicketOutline className='inline-block mr-2' />
-                    Orders
+                    All Orders
                   </Link>
                 </li>
                 <li className='p-3 hover:bg-gray-200 rounded-md transition-all'>
-                  <Link href="/profile">
+                  <Link href="/admin/users" onClick={closeSideMenu}>
                     <IoPeopleOutline className='inline-block mr-2' />
                     Users
                   </Link>

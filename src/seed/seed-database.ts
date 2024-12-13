@@ -5,6 +5,10 @@ import { initialData } from './seed'
 async function main() {
 
     // 1. Delete all data in the database
+    await prisma.orderAddress.deleteMany();
+    await prisma.userAddress.deleteMany();
+    await prisma.orderItem.deleteMany();
+    await prisma.order.deleteMany();
     await prisma.country.deleteMany();
     await prisma.productImage.deleteMany();
     await prisma.product.deleteMany();

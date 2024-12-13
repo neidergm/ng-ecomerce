@@ -1,5 +1,4 @@
-import { IsPaid, PaypalButton, Title } from '@/components';
-import Image from 'next/image';
+import { IsPaid, PaypalButton, ProductImage, Title } from '@/components';
 import { getOrdersById } from '@/actions';
 import { redirect } from 'next/navigation';
 import { currencyFormat } from '@/utils';
@@ -38,8 +37,8 @@ export default async function OrdersPage({ params }: Props) {
                             order.OrderItem.map(item => (
 
                                 <div key={item.Product.slug + item.size} className="flex mb-5">
-                                    <Image
-                                        src={`/imgs/products/${item.Product.ProductImage[0].url}`}
+                                    <ProductImage
+                                        src={item.Product.ProductImage[0].url}
                                         width={100}
                                         height={100}
                                         style={{

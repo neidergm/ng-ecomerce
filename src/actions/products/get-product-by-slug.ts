@@ -8,11 +8,9 @@ export const getProductBySlug = async (slug: string) => {
         const product = await prisma.product.findUnique({
             include: {
                 ProductImage: {
-                    select: { url: true }
+                    select: { url: true, id: true }
                 },
-                category:{
-                    select: { name: true }
-                }
+                category: true
             },
             where: { slug }
         })
@@ -20,12 +18,12 @@ export const getProductBySlug = async (slug: string) => {
         if (!product) return null
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { ProductImage, category, categoryId, ...rest } = product
+        const { category, ...rest } = product
 
         return {
             ...rest,
             category: category.name,
-            images: ProductImage.map(({ url }) => url)
+            images: rest.ProductImage.map(({ url }) => url)
         }
     } catch (error) {
         console.log(error)

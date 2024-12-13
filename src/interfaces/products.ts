@@ -9,7 +9,13 @@ export interface Product {
     tags: string[];
     name: string;
     category: string;
+    categoryId: string;
     gender: ValidGenders
+}
+
+export interface ProductImages {
+    url: string;
+    id: number;
 }
 
 // export type ValidCategories = 'men'|'women'|'kid'|'unisex';
